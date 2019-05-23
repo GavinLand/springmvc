@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.omg.CORBA.Request;
 
 import com.gavin.annt.ExtRequestMap;
@@ -46,6 +47,7 @@ public class SpringServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			String pageName =handProcess(req, resp);
+			if(StringUtils.isEmpty(pageName)) return;
 			extResourceViewResolver(pageName, req, resp);
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
