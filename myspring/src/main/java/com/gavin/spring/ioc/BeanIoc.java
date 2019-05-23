@@ -1,12 +1,14 @@
 package com.gavin.spring.ioc;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.Map;
 
-import com.gavin.annt.ExtService;
 import com.gavin.spring.common.ClassUtil;
-
+/**
+ * 
+ * @author acer
+ *
+ */
 public class BeanIoc {
 	 
 	public BeanIoc() {
