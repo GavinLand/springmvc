@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>这是我第一次手写springmvc.....</h1>
-	<h1>哈哈</h1>
+	<h1>HELLO</h1>
+	<h1>Ha Ha ..</h1>
 </body>
 </html>
