@@ -1,7 +1,6 @@
 package com.gavin.spring.servlet;
 
 import java.io.IOException;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.omg.CORBA.Request;
 
 import com.gavin.annt.ExtRequestMap;
 import com.gavin.spring.ioc.SpringIoc;
@@ -32,6 +30,7 @@ public class SpringServlet extends HttpServlet{
 	public void init() throws ServletException {
 		// 1.获取当前包下的所有的类下controlMap
 		try {
+			System.out.println("加载配置开始");
 			new SpringIoc();
 			URIMap = new HashMap<String, Object>();
 			URIMethodMap = new HashMap<String, String>();
@@ -49,6 +48,8 @@ public class SpringServlet extends HttpServlet{
 			String pageName =handProcess(req, resp);
 			if(StringUtils.isEmpty(pageName)) return;
 			extResourceViewResolver(pageName, req, resp);
+//			resp.getWriter().print(pageName);
+//			return;
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,7 +66,7 @@ public class SpringServlet extends HttpServlet{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		super.doPost(req, resp);
+		
 	}
 	
 	/**
@@ -87,7 +88,7 @@ public class SpringServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		super.doGet(req, resp);
+		doPost(req, resp);
 	}
 	
 	/**
@@ -102,6 +103,8 @@ public class SpringServlet extends HttpServlet{
 	 */
 	private String handProcess(HttpServletRequest req, HttpServletResponse resp) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException {
 		String URI = req.getRequestURI();
+		String c= req.getContextPath();
+		URI = URI.substring(c.length(),URI.length());
 		Object handProcessObj= URIMap.get(URI);
 		String retStr = "";
 		if(handProcessObj!=null) {

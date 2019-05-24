@@ -14,7 +14,7 @@ public class TestControl {
 	
 	@ExtRequestMap("/test")
 	public String test() {
-		return null;
+		return "index";
 	}
 
 }
